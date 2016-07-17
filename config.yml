@@ -1,0 +1,20 @@
+# ----------------------------------
+# ClearChat v1.0.0 by Athena222 
+# Help from Pr0totype2 
+# You may not redistribute, resell, 
+# or claim the plugin as your own.
+# ----------------------------------
+# You can use & for color codes, {name}
+# for the players display name, and {target}
+# for the target players display name.
+# ----------------------------------
+# When chat is cleared by a player
+clearchat: '{name} &ajust cleared chat!'
+# When chat is cleared by console
+clearchat-console: '&2Console&a just cleared chat!'
+# The message that is sent when you /clearchat reload
+clearchat-reload: '&aSuccessfully reloaded ClearChat Configuration!'
+# The message that is sent when you /clearchat me
+clearchat-me: '&aYou have cleared your chat!'
+# No permission message
+no-permission: '&cYou do not have permission to use that command!'
