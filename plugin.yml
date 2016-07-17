@@ -1,6 +1,6 @@
 name: ClearChat
 version: 1.0.0
-main: me.athena222.clearchat.ClearChat
+main: me.athena222.clearchat.Main
 authors: [Athena222, Pr0totype2]
 description: Clear your servers chat the professional way!
 website: https://www.spigotmc.org/resources/clearchat.15985/

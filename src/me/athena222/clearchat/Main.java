@@ -1,5 +1,6 @@
 package me.athena222.clearchat;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,12 +14,12 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 		saveDefaultConfig();
+		getCommand("clearchat").setTabCompleter(new TabComplete());
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		String clearchatconsole = ChatColor.translateAlternateColorCodes('&',
-				this.config.getString("clearchat-console", ChatColor.GREEN + "Chat has been cleared by"
-						+ ChatColor.DARK_RED + " Console" + ChatColor.GREEN + "!"));
+		
+		String clearchatconsole = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-console", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + " Console" + ChatColor.GREEN + "!"));
 		String b = "";
 
 		if (!(sender instanceof Player)) {
@@ -29,17 +30,11 @@ public class Main extends JavaPlugin {
 			return true;
 		}
 
-		Player player = (Player) sender;
-		String clearchat = ChatColor.translateAlternateColorCodes('&',
-				this.config.getString("clearchat",
-						ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + player.getDisplayName())
-						.replace("{name}", player.getDisplayName()));
-		String clearchatme = ChatColor.translateAlternateColorCodes('&',
-				this.config.getString("clearchat-me", ChatColor.GREEN + "Your chat has been cleared!"));
-		String clearchatreload = ChatColor.translateAlternateColorCodes('&', this.config.getString("clearchat-reload",
-				ChatColor.GREEN + "Successfully reloaded ClearChat Configuration!"));
-		String noperm = ChatColor.translateAlternateColorCodes('&', this.config.getString("no-permission",
-				ChatColor.RED + "You do not have permission to use that command!"));
+		final Player player = (Player) sender;
+		String clearchat = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + player.getDisplayName()).replace("{name}", player.getDisplayName()));
+		String clearchatme = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-me", ChatColor.GREEN + "Your chat has been cleared!"));
+		String clearchatreload = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-reload", ChatColor.GREEN + "Successfully reloaded ClearChat Configuration!"));
+		String noperm = ChatColor.translateAlternateColorCodes('&', config.getString("no-permission", ChatColor.RED + "You do not have permission to use that command!"));
 
 		if ((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
 			if (args.length == 0) {
@@ -54,18 +49,27 @@ public class Main extends JavaPlugin {
 			player.sendMessage(noperm);
 		}
 
+		final Player target = Bukkit.getPlayerExact(args[0]);
+		
 		if (args.length == 1) {
-			if (args[0].equalsIgnoreCase("help")) {
+			if(args[0].equals(target)) { 
+				for (int i = 0; i < 250; i++) {
+					target.sendMessage(b);
+				}
+				player.sendMessage(target.getDisplayName() + ChatColor.GREEN + "'s " + ChatColor.DARK_GREEN + "has been cleared!");
+			}
+			else if(target == null) {
+				player.sendMessage(ChatColor.RED + "Could not find the specified player!");
+			}
+			else if(args[0].equalsIgnoreCase("help")) {
 				player.sendMessage(b);
 				player.sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "              ClearChat");
-				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "    v" + getDescription().getVersion()
-						+ " by Athena222 & Pr0totype2");
+				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "    v" + getDescription().getVersion() + " by Athena222 & Pr0totype2");
 				player.sendMessage(b);
 				player.sendMessage(ChatColor.AQUA + "/clearchat help " + ChatColor.GRAY + "Shows this page.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat " + ChatColor.GRAY + "Globally clears chat.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat me " + ChatColor.GRAY + "Clears your chat.");
-				player.sendMessage(ChatColor.AQUA + "/clearchat reload " + ChatColor.GRAY
-						+ "Reloads the ClearChat Configuration.");
+				player.sendMessage(ChatColor.AQUA + "/clearchat reload " + ChatColor.GRAY + "Reloads the ClearChat Configuration.");
 				player.sendMessage(b);
 			} else if ((args[0].equalsIgnoreCase("me")) && (player.hasPermission("clearchat.me"))) {
 				for (int i = 0; i < 250; i++) {
