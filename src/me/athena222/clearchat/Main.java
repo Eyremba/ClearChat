@@ -52,16 +52,7 @@ public class Main extends JavaPlugin {
 		final Player target = Bukkit.getPlayerExact(args[0]);
 		
 		if (args.length == 1) {
-			if(args[0].equals(target)) { 
-				for (int i = 0; i < 250; i++) {
-					target.sendMessage(b);
-				}
-				player.sendMessage(target.getDisplayName() + ChatColor.GREEN + "'s " + ChatColor.DARK_GREEN + "has been cleared!");
-			}
-			else if(target == null) {
-				player.sendMessage(ChatColor.RED + "Could not find the specified player!");
-			}
-			else if(args[0].equalsIgnoreCase("help")) {
+		    if(args[0].equalsIgnoreCase("help")) {
 				player.sendMessage(b);
 				player.sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "              ClearChat");
 				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "    v" + getDescription().getVersion() + " by Athena222 & Pr0totype2");
@@ -84,7 +75,25 @@ public class Main extends JavaPlugin {
 			} else if (!player.hasPermission("clearchat.reload")) {
 				player.sendMessage(noperm);
 			}
+			else if (target == null) {
+                player.sendMessage(ChatColor.RED + "Could not find the specified player!");            
+		    }
+			else {
+				
+			if(player.hasPermission("clearchat.player")) {
+				
+			for (int i = 0; i < 250; i++) {
+				target.sendMessage(b);
+			}
+			target.sendMessage(ChatColor.GREEN + "Your chat has been cleared!");
+			player.sendMessage(target.getDisplayName() + ChatColor.GREEN + "'s chat has been cleared!");
+				
+			}
+			else if(!player.hasPermission("clearchat.player")) {
+				player.sendMessage(noperm);
+			}
 		}
-		return true;
-	}
+	 }
+	return true;
+  }	
 }
