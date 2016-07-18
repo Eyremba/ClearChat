@@ -60,6 +60,7 @@ public class Main extends JavaPlugin {
 				player.sendMessage(ChatColor.AQUA + "/clearchat help " + ChatColor.GRAY + "Shows this page.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat " + ChatColor.GRAY + "Globally clears chat.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat me " + ChatColor.GRAY + "Clears your chat.");
+				player.sendMessage(ChatColor.AQUA + "/clearchat <player> " + ChatColor.GRAY + "Clears the specified players chat.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat reload " + ChatColor.GRAY + "Reloads the ClearChat Configuration.");
 				player.sendMessage(b);
 			} else if ((args[0].equalsIgnoreCase("me")) && (player.hasPermission("clearchat.me"))) {
