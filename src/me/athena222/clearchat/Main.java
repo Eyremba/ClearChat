@@ -34,8 +34,8 @@ public class Main extends JavaPlugin {
 		String clearchatreload = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-reload", ChatColor.GREEN + "Successfully reloaded ClearChat Configuration!"));
 		String noperm = ChatColor.translateAlternateColorCodes('&', config.getString("no-permission", ChatColor.RED + "You do not have permission to use that command!"));
 
-		if ((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
-			if (args.length == 0) {
+		if (args.length == 0) {
+			if ((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
 				for (int i = 0; i < 250; i++) getServer().broadcastMessage(b);
 				getServer().broadcastMessage(clearchat);
 				return true;
