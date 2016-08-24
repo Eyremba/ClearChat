@@ -23,7 +23,11 @@ public class Main extends JavaPlugin {
 		String b = "";
 
 		if (!(sender instanceof Player)) {
-			for (int i = 0; i < 250; i++) getServer().broadcastMessage(b);
+			for (int i = 0; i < 250; i++) {
+				for (Player online : Bukkit.getOnlinePlayers()) {
+					online.sendMessage(b);
+				}
+			} 
 			getServer().broadcastMessage(clearchatconsole);
 			return true;
 		}
@@ -36,7 +40,11 @@ public class Main extends JavaPlugin {
 
 		if (args.length == 0) {
 			if ((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
-				for (int i = 0; i < 250; i++) getServer().broadcastMessage(b);
+				for (int i = 0; i < 250; i++) {
+					for (Player online : Bukkit.getOnlinePlayers()) {
+						online.sendMessage(b);
+					}
+				} 
 				getServer().broadcastMessage(clearchat);
 				return true;
 			}
