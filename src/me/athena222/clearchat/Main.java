@@ -19,8 +19,8 @@ public class Main extends JavaPlugin {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
-		String clearchatconsole = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-console", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + " Console" + ChatColor.GREEN + "!"));
-		String b = "";
+		final String clearchatconsole = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-console", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + " Console" + ChatColor.GREEN + "!"));
+		final String b = "";
 
 		if (!(sender instanceof Player)) {
 			for (int i = 0; i < 250; i++) {
@@ -33,10 +33,10 @@ public class Main extends JavaPlugin {
 		}
 
 		final Player player = (Player) sender;
-		String clearchat = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + player.getDisplayName()).replace("{name}", player.getDisplayName()));
-		String clearchatme = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-me", ChatColor.GREEN + "Your chat has been cleared!"));
-		String clearchatreload = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-reload", ChatColor.GREEN + "Successfully reloaded ClearChat Configuration!"));
-		String noperm = ChatColor.translateAlternateColorCodes('&', config.getString("no-permission", ChatColor.RED + "You do not have permission to use that command!"));
+		final String clearchat = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + player.getDisplayName()).replace("{name}", player.getDisplayName()));
+		final String clearchatme = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-me", ChatColor.GREEN + "Your chat has been cleared!"));
+		final String clearchatreload = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-reload", ChatColor.GREEN + "Successfully reloaded ClearChat Configuration!"));
+		final String noperm = ChatColor.translateAlternateColorCodes('&', config.getString("no-permission", ChatColor.RED + "You do not have permission to use that command!"));
 
 		if (args.length == 0) {
 			if ((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
@@ -82,13 +82,10 @@ public class Main extends JavaPlugin {
                 player.sendMessage(ChatColor.RED + "Could not find the specified player!");            
 		    }
 			else {
-				
-			if(player.hasPermission("clearchat.player")) {
-				
-				for (int i = 0; i < 250; i++) target.sendMessage(b);
-				target.sendMessage(ChatColor.GREEN + "Your chat has been cleared!");
-				player.sendMessage(target.getDisplayName() + ChatColor.GREEN + "'s chat has been cleared!");
-				
+				if(player.hasPermission("clearchat.player")) {
+					for (int i = 0; i < 250; i++) target.sendMessage(b);
+					target.sendMessage(ChatColor.GREEN + "Your chat has been cleared!");
+					player.sendMessage(target.getDisplayName() + ChatColor.GREEN + "'s chat has been cleared!");		
 			}
 			else if(!player.hasPermission("clearchat.player")) {
 				player.sendMessage(noperm);

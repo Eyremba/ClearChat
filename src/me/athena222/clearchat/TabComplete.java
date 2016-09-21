@@ -23,7 +23,6 @@ public class TabComplete implements TabCompleter {
 			list.add("reload");
 
 			Collections.sort(list);
-
 			return list;
 		}
 		return null;
