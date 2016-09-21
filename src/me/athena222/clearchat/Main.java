@@ -17,15 +17,13 @@ public class Main extends JavaPlugin {
 		getCommand("clearchat").setTabCompleter(new TabComplete());
 	}
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {		
 		final String clearchatconsole = ChatColor.translateAlternateColorCodes('&', config.getString("clearchat-console", ChatColor.GREEN + "Chat has been cleared by" + ChatColor.DARK_RED + " Console" + ChatColor.GREEN + "!"));
-		final String b = "";
 
 		if (!(sender instanceof Player)) {
 			for (int i = 0; i < 250; i++) {
 				for (Player online : Bukkit.getOnlinePlayers()) {
-					online.sendMessage(b);
+					online.sendMessage("");
 				}
 			} 
 			getServer().broadcastMessage(clearchatconsole);
@@ -39,10 +37,10 @@ public class Main extends JavaPlugin {
 		final String noperm = ChatColor.translateAlternateColorCodes('&', config.getString("no-permission", ChatColor.RED + "You do not have permission to use that command!"));
 
 		if (args.length == 0) {
-			if ((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
+			if((cmd.getName().equalsIgnoreCase("clearchat")) && (player.hasPermission("clearchat.use"))) {
 				for (int i = 0; i < 250; i++) {
 					for (Player online : Bukkit.getOnlinePlayers()) {
-						online.sendMessage(b);
+						online.sendMessage("");
 					}
 				} 
 				getServer().broadcastMessage(clearchat);
@@ -57,18 +55,18 @@ public class Main extends JavaPlugin {
 		
 		if (args.length == 1) {
 		    if(args[0].equalsIgnoreCase("help")) {
-				player.sendMessage(b);
+				player.sendMessage("");
 				player.sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "              ClearChat");
 				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "    v" + getDescription().getVersion() + " by Athena222 & Pr0totype2");
-				player.sendMessage(b);
+				player.sendMessage("");
 				player.sendMessage(ChatColor.AQUA + "/clearchat help " + ChatColor.GRAY + "Shows this page.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat " + ChatColor.GRAY + "Globally clears chat.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat me " + ChatColor.GRAY + "Clears your chat.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat <player> " + ChatColor.GRAY + "Clears the specified players chat.");
 				player.sendMessage(ChatColor.AQUA + "/clearchat reload " + ChatColor.GRAY + "Reloads the ClearChat Configuration.");
-				player.sendMessage(b);
+				player.sendMessage("");
 			} else if ((args[0].equalsIgnoreCase("me")) && (player.hasPermission("clearchat.me"))) {
-				for (int i = 0; i < 250; i++) player.sendMessage(b);
+				for (int i = 0; i < 250; i++) player.sendMessage("");
 				player.sendMessage(clearchatme);
 			} else if (!player.hasPermission("clearchat.me")) {
 				player.sendMessage(noperm);
@@ -83,10 +81,10 @@ public class Main extends JavaPlugin {
 		    }
 			else {
 				if(player.hasPermission("clearchat.player")) {
-					for (int i = 0; i < 250; i++) target.sendMessage(b);
+					for (int i = 0; i < 250; i++) target.sendMessage("");
 					target.sendMessage(ChatColor.GREEN + "Your chat has been cleared!");
 					player.sendMessage(target.getDisplayName() + ChatColor.GREEN + "'s chat has been cleared!");		
-			}
+				}
 			else if(!player.hasPermission("clearchat.player")) {
 				player.sendMessage(noperm);
 			}
